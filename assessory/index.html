@@ -2,6 +2,7 @@
 <html>
  
 <head>
+    <meta charset="utf-8">
     <title>Car Accessories</title>
     <link rel="stylesheet" type="text/css" href="..\css\style.css">
 </head>
@@ -41,6 +42,10 @@
                 <td id="totalPrice">0</td>
             </tr>
             <tr>
+                <td colspan="2">Vat Amount:</td>
+                <td id="vetAmount">0</td>
+            </tr>
+            <tr>
                 <td colspan="2">Net Amount:</td>
                 <td id="netAmount">0</td>
             </tr>
@@ -72,13 +77,15 @@
  
             // Update the total price
             totalPrice += accessoryPrice * amount
-            document.getElementById("totalPrice").innerHTML = totalPrice;
+            document.getElementById("totalPrice").innerHTML = totalPrice.toFixed(2);
 
             vatAmount = totalPrice * vatRate;
 
             netAmount = totalPrice + vatAmount;
 
-            document.getElementById("netAmount").innerHTML = netAmount;
+            document.getElementById("vetAmount").innerHTML = vatAmount.toFixed(2);
+
+            document.getElementById("netAmount").innerHTML = netAmount.toFixed(2);
         }
  
         
