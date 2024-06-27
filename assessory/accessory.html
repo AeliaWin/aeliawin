@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Car Accessories</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <style>
+    table {
+      border-collapse: collapse;
+      /* width: 100%; */
+    }
+
+    th,
+    td {
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    th {
+      background-color: brown;
+      color: #f2f2f2;
+    }
+  </style>
+</head>
+<body>
+    <h1>Car Accessories</h1>
+ 
+    <form id="accessoryForm">
+        <label for="accessory">Select an accessory:</label>
+        <select id="accessory">
+            <option value="100">Car Cover</option>
+            <option value="200">Floor Mats</option>
+            <option value="300">Seat Covers</option>
+            <option value="400">Phone Holder</option>
+        </select>
+        <br>
+        <label for="amount">Amount:</label>
+        <input type="number" id="amount" min="1" value="1">
+        <br>
+        <button type="button" onclick="addToProductList()">Add</button>
+    </form>
+    <br>
+    <table id="productList">
+        <thead>
+            <tr>
+                <th>Accessory</th>
+                <th>Amount</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        </tbody>
+        <tfoot>
+            <tr>
+                <td colspan="2">GrossPrice:</td>
+                <td id="totalPrice">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Vat Amount:</td>
+                <td id="vatAmount">0</td>
+            </tr>
+            <tr>
+                <td colspan="2">Net Amount:</td>
+                <td id="netAmount">0</td>
+            </tr>
+        </tfoot>
+    </table>
+</body>
+<script>
+    var total = 0
+    function addToProductList() {
+        // var accessory = document.getElementById("accessories");
+        // var amount = document.getElementById("amount");
+        // var table = document.getElementById("productList");
+
+        // var row = table.insertRow(-1);
+        // var cell1 = row.insertCell(0);
+        // var cell2 = row.insertCell(1);
+        // var cell3 = row.insertCell(2);
+        // var cell4 = row.insertCell(3);
+
+        // cell1.innerHTML = accessory.options[accessory.selectedIndex].text;
+        // cell2.innerHTML = amount.value;
+        // cell3.innerHTML = "$" + accessory.value;
+        // cell4.innerHTML = "$" + accessory.value * amount.value;
+
+        var accessory_name = $('#accessory').find(":selected").text();
+        var price = $('#accessory').find(":selected").val();
+        var amount = $('#amount').val();
+        var table = $('#productList').val();
+
+        const tbodyRef = $('#productList tbody');
+        tbodyRef.before(
+            `<tr>
+                <td>${accessory_name}</td>
+                <td>${amount}</td>
+                <td>${price}</td>
+            </tr>`
+        )
+        
+
+        total += price * amount;
+        var vat_amount = total * 0.07;
+        var net_amount = total+vat_amount;
+
+        $('#totalPrice').html('GrossPrice: '+total.toFixed(2));
+        $('#vatAmount').html('Vat Amount: '+vat_amount.toFixed(2));
+        $('#netAmount').html('Net Amount: '+net_amount.toFixed(2));
+    }
+
+</script>
+</html>
